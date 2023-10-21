@@ -1,0 +1,6 @@
+{
+    "name": "hereCommand",
+    "creator": "Nasibtw and Sorer",
+    "description": "Welcoming the person with a randomized comment",
+    "entry": "./index.js"
+}
