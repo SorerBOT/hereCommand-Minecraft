@@ -33,7 +33,7 @@ function sendGoMessage(scoreNeeded) {
   const score = getScoreFromMessage(noFormattingLine);
 
   if (score >= scoreNeeded) {
-    ChatLib.say("/pc Go go go !");
+    ChatLib.say("/pc It's 300 time https://imgur.com/e0XhBfN");
     sentGoMessage = true;
   }
 }
@@ -41,7 +41,7 @@ register("WorldLoad", () => {
   sentGoMessage = false;
 });
 register("tick", () => {
-  if (tick % 20 == 0 && !sentGoMessage) sendGoMessage(100);
+  if (tick % 20 == 0 && !sentGoMessage) sendGoMessage(272);
   tick++;
 });
 register("command", (user) => {
