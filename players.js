@@ -63,6 +63,38 @@ export default players = {
       healer: true,
       mage: true,
       bers: true
+    },
+    {
+      name: "Suq5",
+      archer: true,
+      tank: true,
+      healer: true,
+      mage: true,
+      bers: true
+    },
+    {
+      name: "NotLawi",
+      archer: true,
+      tank: true,
+      healer: true,
+      mage: false,
+      bers: true
+    },
+    {
+      name: "varks",
+      archer: true,
+      tank: true,
+      healer: true,
+      mage: false,
+      bers: true
+    },
+    {
+      name: "drystreak",
+      archer: true,
+      tank: true,
+      healer: true,
+      mage: false,
+      bers: true
     }
   ] 
 }
