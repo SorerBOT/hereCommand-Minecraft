@@ -65,26 +65,14 @@ register("command", () => {
 }).setName("artofwar");
 
 
-register("command", (user, first, second, third) => {
+register("command", (user, ...drop) => {
   let randomNum = Math.floor(Math.random() * (100 - 30 + 1)) + 30;
-  let sentence = "There is a "+ randomNum + " chance that "+ user + " will get a ";
-  let drop = first + " ";
-  
-  if( second != undefined){
-    drop+=second+" ";
-  }
-  if( third != undefined){
-    drop+=third+" ";
-  }
+  let sentence = "There is a "+ randomNum + " chance that "+ user + " will get a "+drop;
+
   let punctuation = /[\.,?!]/g;
   drop.replace(punctuation,"");
-
-  if(drop.charAt(drop.length-1)==" "){
-    drop = drop.slice(0,-1);
-  }
-
-  ChatLib.say("/pc The almighty 8ball, will "+user+ " get a " + drop +" today?");
+  ChatLib.say("/pc The almighty 8-ball, will "+user+ " get a " + drop +" today?");
   setTimeout(() => {
-    ChatLib.say("/pc " + sentence + drop + ".");
+    ChatLib.say("/pc " + sentence + ".");
   }, 500);
 }).setName("spinTheDice").setAliases("roll");
