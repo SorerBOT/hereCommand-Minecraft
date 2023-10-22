@@ -47,7 +47,10 @@ register("tick", () => {
   if (tick % 20 == 0 && !sentGoMessage) sendGoMessage(272);
   tick++;
 });
-register("command", (user) => {
+register("command", (user, index) => {
+  if (index != undefined) {
+      idx = index;
+  }
   const sentence = sentences[idx];
   const formattedSentence = sentence.replace("<ign>", user);
 
@@ -56,7 +59,10 @@ register("command", (user) => {
 }).setName("shalom");
 
 let artOfWarIndex = 0;
-register("command", () => {
+register("command", (index) => {
+    if (index != undefined) {
+        artOfWarIndex = index;
+    }
   const sentence = artOfWarQuotes[artOfWarIndex];
   const formattedSentence = sentence.concat(" - Sun Tzu, The Art of War");
   
@@ -70,7 +76,6 @@ register("command", (user, ...drop) => {
   let sentence = "There is a "+ randomNum + " chance that "+ user + " will get a "+drop;
 
   let punctuation = /[\.,?!]/g;
-  drop.replace(punctuation,"");
   ChatLib.say("/pc The almighty 8-ball, will "+user+ " get a " + drop +" today?");
   setTimeout(() => {
     ChatLib.say("/pc " + sentence + ".");
