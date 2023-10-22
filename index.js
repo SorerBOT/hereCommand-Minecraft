@@ -38,15 +38,26 @@ register("tick", () => {
   if (tick % 20 == 0 && !sentGoMessage) sendGoMessage(272);
   tick++;
 });
-register("command", (user) => {
-  const sentence = welcomeSentences[idx];
+
+register("command", (user, index) => {
+  if (index != undefined) {
+      idx = index;
+  }
+  const sentence = sentences[idx];
+
   const formattedSentence = sentence.replace("<ign>", user);
 
   ChatLib.say("/pc " + formattedSentence);
   idx++;  
 }).setName("shalom");
 
-register("command", () => {
+
+let artOfWarIndex = 0;
+register("command", (index) => {
+    if (index != undefined) {
+        artOfWarIndex = index;
+    }
+
   const sentence = artOfWarQuotes[artOfWarIndex];
   const formattedSentence = sentence.concat(" - Sun Tzu, The Art of War");
   
@@ -54,11 +65,20 @@ register("command", () => {
   artOfWarIndex++;  
 }).setName("artofwar");
 
-register("chat", (player, drop, event) => {
+
+register("command", (user, ...drop) => {
   let randomNum = Math.floor(Math.random() * (100 - 30 + 1)) + 30;
-  let sentence = "There is a "+ randomNum + " chance that "+ player + " will get " + drop;
-  ChatLib.say("/pc " + sentence);
-}).setCriteria("Will ${player} get ${drop}").setContains();
+
+  let sentence = "There is a "+ randomNum + " chance that "+ user + " will get a "+drop;
+
+  let punctuation = /[\.,?!]/g;
+  ChatLib.say("/pc The almighty 8-ball, will "+user+ " get a " + drop +" today?");
+  setTimeout(() => {
+    ChatLib.say("/pc " + sentence + ".");
+  }, 500);
+}).setName("spinTheDice").setAliases("roll");
+
+
 
 register("command", (neededClass) => {
   const { players } = playersObject;
@@ -66,3 +86,4 @@ register("command", (neededClass) => {
 
   ChatLib.chat(`§3Possible ${neededClass}:\n${possiblePlayers.map((player) => "§6" + player.name).join("§7, ")}`);
 }).setName("playerList");
+
