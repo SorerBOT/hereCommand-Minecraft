@@ -58,7 +58,7 @@ export default players = {
     },
     {
       name: "Hoofay",
-      archer: true,
+      archer: false,
       tank: true,
       healer: true,
       mage: true,
@@ -82,7 +82,7 @@ export default players = {
     },
     {
       name: "varks",
-      archer: true,
+      archer: false,
       tank: true,
       healer: true,
       mage: false,
@@ -93,8 +93,24 @@ export default players = {
       archer: true,
       tank: true,
       healer: true,
+      mage: true,
+      bers: true
+    },
+    {
+      name: "nlofi",
+      archer: false,
+      tank: true,
+      healer: true,
+      mage: true,
+      bers: true
+    },
+    {
+      name: "ActualSkillIssue",
+      archer: false,
+      tank: true,
+      healer: true,
       mage: false,
       bers: true
-    }
+    },
   ] 
 }
