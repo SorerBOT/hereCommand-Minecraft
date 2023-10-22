@@ -1,3 +1,6 @@
+import welcomeSentences from "./welcomeSentences";
+import artOfWarQuotes from "./artOfWarQuotes";
+
 const sentences = [
     "He is here, the man they all fear, the one with the greatest clear. He has the fastest runs, he scares all the NONs, <ign> !!",
     "Behold, the virtual legend that is <ign>, the master of gaming, he conquers every room with his mere presence slaying mobs by his mere glance.",
@@ -51,3 +54,18 @@ register("command", (user) => {
   ChatLib.say("/pc " + formattedSentence);
   idx++;  
 }).setName("shalom");
+
+let artOfWarIndex = 0;
+register("command", () => {
+  const sentence = artOfWarQuotes[artOfWarIndex];
+  const formattedSentence = sentence.concat(" - Sun Tzu, The Art of War");
+  
+  ChatLib.say("/pc " + formattedSentence);
+  artOfWarIndex++;  
+}).setName("artofwar");
+
+register("chat", (player, drop, event) => {
+  let randomNum = Math.floor(Math.random() * (100 - 30 + 1)) + 30;
+  let sentence = "There is a "+ randomNum + " chance that "+ player + " will get " + drop;
+  ChatLib.say("/pc " + sentence);
+}).setCriteria("Will ${player} get ${drop}").setContains();
