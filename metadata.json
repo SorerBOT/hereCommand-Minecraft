@@ -1,6 +1,6 @@
 {
     "name": "AOTS addons",
     "creator": "Nasibtw and Sorer",
-    "description": "Welcoming the person with a randomized comment",
+    "description": "Welcoming the person with a randomized comment, works?",
     "entry": "./index.js"
 }
