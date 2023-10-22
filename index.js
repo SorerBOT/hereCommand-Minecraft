@@ -21,6 +21,7 @@ register("tick", () => {
   if (State.tick % 20 == 0 && !State.sentGoMessage) sendGoMessage(20, State.setSentGoMessage);
   State.setTick(State.tick + 1);
 });
+
 register("command", (user, index) => {
   if (index != undefined) State.setIdx(index);
 
@@ -41,11 +42,20 @@ register("command", (index) => {
   State.setArtOfWarIndex(State.artOfWarIndex + 1);  
 }).setName("artofwar");
 
-register("chat", (player, drop, event) => {
+
+register("command", (user, ...drop) => {
   let randomNum = Math.floor(Math.random() * (100 - 30 + 1)) + 30;
-  let sentence = "There is a "+ randomNum + " chance that "+ player + " will get " + drop;
-  ChatLib.say("/pc " + sentence);
-}).setCriteria("Will ${player} get ${drop}").setContains();
+
+  let sentence = "There is a "+ randomNum + " chance that "+ user + " will get a "+drop;
+
+  let punctuation = /[\.,?!]/g;
+  ChatLib.say("/pc The almighty 8-ball, will "+user+ " get a " + drop +" today?");
+  setTimeout(() => {
+    ChatLib.say("/pc " + sentence + ".");
+  }, 500);
+}).setName("spinTheDice").setAliases("roll");
+
+
 
 register("command", (neededClass) => {
   const { players } = playersObject;
@@ -53,3 +63,4 @@ register("command", (neededClass) => {
 
   ChatLib.chat(`§3Possible ${neededClass}:\n${possiblePlayers.map((player) => "§6" + player.getName()).join("§7, ")}`);
 }).setName("playerList");
+
