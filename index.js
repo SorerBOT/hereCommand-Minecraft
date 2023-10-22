@@ -10,8 +10,40 @@ const sentences = [
     "Whilst delving into the catacombs and facing the most worrisome of enemies; This is the one player you would want on your side <ign>"
 ];
 
+let sentGoMessage = false;
+let tick = 0;
 let idx = 0;
 
+function removeColorFormatting(inputString) {
+  // Use a regular expression to match color codes (§x) and remove them
+  const strippedString = inputString.replace(/§[0-9a-fklmnor]/g, '');
+  return strippedString;
+}
+function getScoreFromMessage(message) {
+  return message.slice(message.indexOf('(') + 1, message.indexOf(')'));
+}
+
+function sendGoMessage(scoreNeeded) {
+  const scoreboard = Scoreboard.getLines();
+  // entry is an object, can be converted to String
+  if (scoreboard === undefined) return;
+  const line = scoreboard.filter((entry) => entry.toString().includes("Cleared:"))[0];
+  if (line === undefined) return;
+  const noFormattingLine = removeColorFormatting(line.toString());
+  const score = getScoreFromMessage(noFormattingLine);
+
+  if (score >= scoreNeeded) {
+    ChatLib.say("/pc Go go go !");
+    sentGoMessage = true;
+  }
+}
+register("WorldLoad", () => {
+  sentGoMessage = false;
+});
+register("tick", () => {
+  if (tick % 20 == 0 && !sentGoMessage) sendGoMessage(100);
+  tick++;
+});
 register("command", (user) => {
   const sentence = sentences[idx];
   const formattedSentence = sentence.replace("<ign>", user);
