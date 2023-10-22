@@ -1,116 +1,20 @@
+import Player from "./player.js";
+
 export default players = {
   players: [
-    {
-      name: "DarkAngelCY",
-      archer: false,
-      tank: true,
-      healer: true,
-      mage: false,
-      bers: true
-    },
-    {
-      name: "Befahren",
-      archer: false,
-      tank: true,
-      healer: true,
-      mage: false,
-      bers: true
-    },
-    {
-      name: "NotDanzi",
-      archer: true,
-      tank: true,
-      healer: true,
-      mage: false,
-      bers: true
-    },
-    {
-      name: "PlaySkyBlock",
-      archer: true,
-      tank: true,
-      healer: true,
-      mage: true,
-      bers: true
-    },
-    {
-      name: "45ms_",
-      archer: true,
-      tank: true,
-      healer: true,
-      mage: false,
-      bers: true
-    },
-    {
-      name: "johnylau06",
-      archer: true,
-      tank: true,
-      healer: true,
-      mage: false,
-      bers: true
-    },
-    {
-      name: "Unnamed_2",
-      archer: true,
-      tank: true,
-      healer: true,
-      mage: true,
-      bers: true
-    },
-    {
-      name: "Hoofay",
-      archer: false,
-      tank: true,
-      healer: true,
-      mage: true,
-      bers: true
-    },
-    {
-      name: "Suq5",
-      archer: true,
-      tank: true,
-      healer: true,
-      mage: true,
-      bers: true
-    },
-    {
-      name: "NotLawi",
-      archer: true,
-      tank: true,
-      healer: true,
-      mage: false,
-      bers: true
-    },
-    {
-      name: "varks",
-      archer: false,
-      tank: true,
-      healer: true,
-      mage: false,
-      bers: true
-    },
-    {
-      name: "drystreak",
-      archer: true,
-      tank: true,
-      healer: true,
-      mage: true,
-      bers: true
-    },
-    {
-      name: "nlofi",
-      archer: false,
-      tank: true,
-      healer: true,
-      mage: true,
-      bers: true
-    },
-    {
-      name: "ActualSkillIssue",
-      archer: false,
-      tank: true,
-      healer: true,
-      mage: false,
-      bers: true
-    },
+    new Player("DarkAngelCY", false, true, true, false, true),
+    new Player("Befahren", false, true, true, false, true),
+    new Player("NotDanzi", true, true, true, false, true),
+    new Player("PlaySkyBlock", true, true, true, true, true),
+    new Player("45ms_", false, true, true, false, true),
+    new Player("Unnamed_2", true, true, true, true, true),
+    new Player("Hoofay", false, true, true, true, true),
+    new Player("Suq5", true, true, true, true, true),
+    new Player("NotLawi", true, true, true, false, true),
+    new Player("varks", false, true, true, false, true),
+    new Player("drystreak", true, true, true, true, true),
+    new Player("nlofi", false, true, true, true, true),
+    new Player("NotLawi", true, true, true, false, true),
+    new Player("ActualSkillIssue", false, true, true, false, true),
   ] 
 }

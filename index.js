@@ -1,57 +1,44 @@
 import welcomeSentences from "./welcomeSentences";
 import artOfWarQuotes from "./artOfWarQuotes";
 import playersObject from "./players.js";
+import sendGoMessage from "./Utils/sendGoMessage.js";
 
-let sentGoMessage = false;
-let tick = 0;
-let idx = 0;
-let artOfWarIndex = 0;
-
-function removeColorFormatting(inputString) {
-  // Use a regular expression to match color codes (§x) and remove them
-  const strippedString = inputString.replace(/§[0-9a-fklmnor]/g, '');
-  return strippedString;
-}
-function getScoreFromMessage(message) {
-  return message.slice(message.indexOf('(') + 1, message.indexOf(')'));
-}
-
-function sendGoMessage(scoreNeeded) {
-  const scoreboard = Scoreboard.getLines();
-  // entry is an object, can be converted to String
-  if (scoreboard === undefined) return;
-  const line = scoreboard.filter((entry) => entry.toString().includes("Cleared:"))[0];
-  if (line === undefined) return;
-  const noFormattingLine = removeColorFormatting(line.toString());
-  const score = getScoreFromMessage(noFormattingLine);
-
-  if (score >= scoreNeeded) {
-    ChatLib.say("/pc It's 300 time https://imgur.com/e0XhBfN");
-    sentGoMessage = true;
-  }
+const State = {
+  sentGoMessage: false,
+  tick: 0,
+  idx: 0,
+  artOfWarIndex: 0,
+  setSentGoMessage: (value) => { State.sentGoMessage = value; },
+  setTick: (value) => { State.tick = value; },
+  setIdx: (value) => { State.idx = value; },
+  setArtOfWarIndex: (value) => { State.artOfWarIndex = value; }
 }
 
 register("WorldLoad", () => {
-  sentGoMessage = false;
+  State.setSentGoMessage(false);
 });
 register("tick", () => {
-  if (tick % 20 == 0 && !sentGoMessage) sendGoMessage(272);
-  tick++;
+  if (State.tick % 20 == 0 && !State.sentGoMessage) sendGoMessage(20, State.setSentGoMessage);
+  State.setTick(State.tick + 1);
 });
-register("command", (user) => {
-  const sentence = welcomeSentences[idx];
+register("command", (user, index) => {
+  if (index != undefined) State.setIdx(index);
+
+  const sentence = welcomeSentences[State.idx];
   const formattedSentence = sentence.replace("<ign>", user);
 
   ChatLib.say("/pc " + formattedSentence);
-  idx++;  
+  State.setIdx(State.idx + 1);  
 }).setName("shalom");
 
-register("command", () => {
-  const sentence = artOfWarQuotes[artOfWarIndex];
+register("command", (index) => {
+  if (index != undefined) State.setArtOfWarIndex(index);
+  
+  const sentence = artOfWarQuotes[State.artOfWarIndex];
   const formattedSentence = sentence.concat(" - Sun Tzu, The Art of War");
   
   ChatLib.say("/pc " + formattedSentence);
-  artOfWarIndex++;  
+  State.setArtOfWarIndex(State.artOfWarIndex + 1);  
 }).setName("artofwar");
 
 register("chat", (player, drop, event) => {
@@ -62,7 +49,7 @@ register("chat", (player, drop, event) => {
 
 register("command", (neededClass) => {
   const { players } = playersObject;
-  const possiblePlayers = players.filter((player) => player[neededClass]);
+  const possiblePlayers = players.filter((player) => player.getClass(neededClass));
 
-  ChatLib.chat(`§3Possible ${neededClass}:\n${possiblePlayers.map((player) => "§6" + player.name).join("§7, ")}`);
+  ChatLib.chat(`§3Possible ${neededClass}:\n${possiblePlayers.map((player) => "§6" + player.getName()).join("§7, ")}`);
 }).setName("playerList");
