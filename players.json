@@ -1,0 +1,60 @@
+export default {
+  "players": [
+    "DarkAngelCY": {
+      "archer": false,
+      "tank": true,
+      "healer": true,
+      "mage": false,
+      "bers": true
+    },
+    "Befahren": {
+      "archer": false,
+      "tank": true,
+      "healer": true,
+      "mage": false,
+      "bers": true
+    },
+    "NotDanzi": {
+      "archer": true,
+      "tank": true,
+      "healer": true,
+      "mage": false,
+      "bers": true
+    },
+    "PlaySkyBlock": {
+      "archer": true,
+      "tank": true,
+      "healer": true,
+      "mage": true,
+      "bers": true
+    },
+    "45ms_": {
+      "archer": true,
+      "tank": true,
+      "healer": true,
+      "mage": false,
+      "bers": true
+    },
+    "johnylau06": {
+      "archer": true,
+      "tank": true,
+      "healer": true,
+      "mage": false,
+      "bers": true
+    },
+    "Unnamed_2": {
+      "archer": true,
+      "tank": true,
+      "healer": true,
+      "mage": true,
+      "bers": true
+    },
+    "Hoofay": {
+      "archer": true,
+      "tank": true,
+      "healer": true,
+      "mage": true,
+      "bers": true
+    }
+  ]
+}
